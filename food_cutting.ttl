@@ -1,0 +1,2091 @@
+@prefix : <http://www.ease-crc.org/ont/food_cutting#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix SpecificationMetadata: <https://www.omg.org/techprocess/ab/SpecificationMetadata/> .
+@base <http://www.ease-crc.org/ont/food_cutting#> .
+
+<http://www.ease-crc.org/ont/food_cutting> rdf:type owl:Ontology ;
+                                            owl:versionIRI <http://www.ease-crc.org/ont/food_cutting/1.0> ;
+                                            terms:contributor "Michaela Kümpel, Jan-Philipp Töberg" ;
+                                            terms:license "https://opendatacommons.org/licenses/by/1-0/" ;
+                                            rdfs:comment "This is a food cutting ontology example to teach robots new task variations of cutting food." ;
+                                            SpecificationMetadata:copyright """Copyright (c) 2021 Michaela Kümpel, Jan-Philipp Töberg
+
+This work is licensed under Open Data Commons Attribution License (ODC-BY 1.0 license).
+
+You are free:
+
+    To share: To copy, distribute and use the database.
+    To create: To produce works from the database.
+    To adapt: To modify, transform and build upon the database.
+
+As long as you:
+
+    Attribute: Attribute the work to the original authors. You must attribute any public use of the database, or works produced from the database. For any use or redistribution of the database, or works produced from it, you must make clear to others the license of the database and keep intact any notices on the original database.""" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/contributor
+terms:contributor rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+terms:license rdf:type owl:AnnotationProperty .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#verb
+:verb rdf:type owl:AnnotationProperty .
+
+
+###  https://www.omg.org/techprocess/ab/SpecificationMetadata/copyright
+SpecificationMetadata:copyright rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.ease-crc.org/ont/SOMA.owl#affordsTask
+<http://www.ease-crc.org/ont/SOMA.owl#affordsTask> rdf:type owl:ObjectProperty ;
+                                                   rdfs:range <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task> .
+
+
+###  http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger
+<http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> rdf:type owl:ObjectProperty .
+
+
+###  http://www.ease-crc.org/ont/SOMA.owl#hasDisposition
+<http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> rdf:type owl:ObjectProperty .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#affordsPosition
+:affordsPosition rdf:type owl:ObjectProperty .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#hasColor
+:hasColor rdf:type owl:ObjectProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain <http://purl.obolibrary.org/obo/FOODON_00001057> ;
+          rdfs:range :Color .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#hasEdibility
+:hasEdibility rdf:type owl:ObjectProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :FoodPart ;
+              rdfs:range :Edibility .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#hasInitialState
+:hasInitialState rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :hasState ;
+                 rdfs:domain <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task> ;
+                 rdfs:range :FruitState .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#hasInputObject
+:hasInputObject rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#hasLocation
+:hasLocation rdf:type owl:ObjectProperty ;
+             rdfs:domain :PartInside ;
+             rdfs:range :FoodPart .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#hasPart
+:hasPart rdf:type owl:ObjectProperty ;
+         owl:inverseOf :partOf ;
+         rdf:type owl:TransitiveProperty ;
+         rdfs:domain :Food ;
+         rdfs:range :FoodPart .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#hasResultObject
+:hasResultObject rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdfs:range :Shape .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#hasResultingState
+:hasResultingState rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :hasState ;
+                   rdfs:domain <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task> ;
+                   rdfs:range :FruitState .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#hasSize
+:hasSize rdf:type owl:ObjectProperty ;
+         rdfs:domain <http://purl.obolibrary.org/obo/FOODON_00001057> ;
+         rdfs:range :Size .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#hasState
+:hasState rdf:type owl:ObjectProperty .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#partOf
+:partOf rdf:type owl:ObjectProperty ,
+                 owl:TransitiveProperty .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#requiresPriorTask
+:requiresPriorTask rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf <http://www.ease-crc.org/ont/meal_prep#hasPriorTask> ;
+                   rdfs:domain <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task> ;
+                   rdfs:range <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#target
+:target rdf:type owl:ObjectProperty ;
+        rdfs:domain :CuttingTask ;
+        rdfs:range <http://purl.obolibrary.org/obo/FOODON_00001057> .
+
+
+###  http://www.ease-crc.org/ont/meal_prep#hasPriorTask
+<http://www.ease-crc.org/ont/meal_prep#hasPriorTask> rdf:type owl:ObjectProperty ;
+                                                     rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.ease-crc.org/ont/food_cutting#amount
+:amount rdf:type owl:DatatypeProperty ;
+        rdfs:domain :CuttingTask ;
+        rdfs:range xsd:integer .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#angle
+:angle rdf:type owl:DatatypeProperty ;
+       rdfs:range xsd:integer .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#genus
+:genus rdf:type owl:DatatypeProperty ;
+       rdfs:domain <http://purl.obolibrary.org/obo/FOODON_00001057> ;
+       rdfs:range xsd:string ;
+       rdfs:comment "describes the biological genus" .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#repetitions
+:repetitions rdf:type owl:DatatypeProperty ;
+             rdfs:domain <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task> .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.obolibrary.org/obo/FOODON_00001057
+<http://purl.obolibrary.org/obo/FOODON_00001057> rdf:type owl:Class ;
+                                                 rdfs:subClassOf :Food ;
+                                                 rdfs:label "plant fruit food product"@en .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00003415
+<http://purl.obolibrary.org/obo/FOODON_00003415> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030111> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :Peeling
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Peeler
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peel
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :Edible
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Stem
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :ShouldBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasColor ;
+                                                                   owl:hasValue :Green
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :genus ;
+                                                                   owl:hasValue "Cucumis"
+                                                                 ] ;
+                                                 rdfs:label "cucumber (whole)"@en .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00003443
+<http://purl.obolibrary.org/obo/FOODON_00003443> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/FOODON_00001057> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Stem
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :ShouldBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ;
+                                                 rdfs:comment "An aggregate fruit of strawberry plant  (Fragaria x ananassa)." ;
+                                                 rdfs:label "strawberry" .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00003449
+<http://purl.obolibrary.org/obo/FOODON_00003449> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030102> ;
+                                                 rdfs:comment "A drupe fruit of a coconut palm tree (Cocos nucifera)." ;
+                                                 rdfs:label "coconut" .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00003459
+<http://purl.obolibrary.org/obo/FOODON_00003459> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030108> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :CoreRemovability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CoreCutting
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :Peeling
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Core
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :Edible
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peel
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :MustBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ;
+                                                 rdfs:comment "A fruit multiple from a pineapple tree (Ananas comosus)." ;
+                                                 rdfs:label "pineapple" .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00003478
+<http://purl.obolibrary.org/obo/FOODON_00003478> rdf:type owl:Class ;
+                                                 rdfs:subClassOf :stone_fruit ;
+                                                 rdfs:comment "An edible drupe fruit of a cherry plant." ;
+                                                 rdfs:label "cherry" .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00003486
+<http://purl.obolibrary.org/obo/FOODON_00003486> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030111> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :CoreRemovability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CoreScraping
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Spoon
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :Peeling
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peel
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :ShouldBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ;
+                                                 rdfs:comment "An orange-yellow pepo fruit of a pumpkin plant." ;
+                                                 rdfs:label "pumpkin" .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00003520
+<http://purl.obolibrary.org/obo/FOODON_00003520> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030108> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Stem
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :ShouldBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ;
+                                                 rdfs:comment "A berry fruit of a pepper plant (Capsicum)" ;
+                                                 rdfs:label "pepper" .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00003523
+<http://purl.obolibrary.org/obo/FOODON_00003523> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030102> ;
+                                                 rdfs:comment "A drupe fruit of an almond plant (Prunus dulcis)." ;
+                                                 rdfs:label "almond" .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00003539
+<http://purl.obolibrary.org/obo/FOODON_00003539> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030111> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :CoreRemovability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CoreScraping
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Spoon
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :Peeling
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peel
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :ShouldBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ;
+                                                 rdfs:comment "A pepo fruit varietal of a squash plant (Cucurbita)." ;
+                                                 rdfs:label "squash" .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00003600
+<http://purl.obolibrary.org/obo/FOODON_00003600> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030108> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :CoreRemovability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CoreCutting
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Spoon
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :Peeling
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Core
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :MustBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peel
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :MustBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ;
+                                                 rdfs:comment "A berry fruit of an avocado plant (Persea americana)"@en ;
+                                                 rdfs:label "avocado"@en .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00003661
+<http://purl.obolibrary.org/obo/FOODON_00003661> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/FOODON_03301337> ;
+                                                 rdfs:comment "A hesperidium fruit of a lime plant." ;
+                                                 rdfs:label "lime" .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00004183
+<http://purl.obolibrary.org/obo/FOODON_00004183> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030108> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :Peeling
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom <http://www.ease-crc.org/ont/SOMA.owl#Hand>
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peel
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :MustBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ;
+                                                 rdfs:comment "A berry fruit from a banana tree (genus Musa)." ;
+                                                 rdfs:label "banana" .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_00004387
+<http://purl.obolibrary.org/obo/FOODON_00004387> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030108> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :Peeling
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peel
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :Edible
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ;
+                                                 rdfs:label "kiwi fruit"@en .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_03301337
+<http://purl.obolibrary.org/obo/FOODON_03301337> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/FOODON_00001057> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :Peeling
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom <http://www.ease-crc.org/ont/SOMA.owl#Hand>
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peel
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :MustBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ;
+                                                 rdfs:label "citrus fruit (whole, raw)"@en .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_03301403
+<http://purl.obolibrary.org/obo/FOODON_03301403> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/FOODON_00001057> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ;
+                                                 rdfs:comment "None" ;
+                                                 rdfs:label "bean" .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_03301441
+<http://purl.obolibrary.org/obo/FOODON_03301441> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/FOODON_03301337> ;
+                                                 rdfs:comment "A hesperidium fruit of a lemon plant (Citrus limon)" ;
+                                                 rdfs:label "lemon" ,
+                                                            "lemon (whole, raw)"@en .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_03301710
+<http://purl.obolibrary.org/obo/FOODON_03301710> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030110> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :CoreRemovability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CoreCutting
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom <http://www.ease-crc.org/ont/SOMA.owl#CuttingTool>
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :CoreRemovability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CoreScraping
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Spoon
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :Peeling
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Peeler
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom <http://www.ease-crc.org/ont/SOMA.owl#CuttingTool>
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Core
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :ShouldBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peel
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :Edible
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :genus ;
+                                                                   owl:hasValue "Malus"
+                                                                 ] ;
+                                                 rdfs:comment "A whole raw apple is an apple harvested from an apple tree. It may include a stem. It has not been subject to cooking or preservation processes other than cold storage or waxing." ;
+                                                 rdfs:label "apple" ,
+                                                            "apple (whole, raw)"@en .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_03306596
+<http://purl.obolibrary.org/obo/FOODON_03306596> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/FOODON_03301337> ;
+                                                 rdfs:label "citron (whole, raw)"@en .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_03306597
+<http://purl.obolibrary.org/obo/FOODON_03306597> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/FOODON_03301337> ;
+                                                 rdfs:label "kumquat (whole, raw)"@en .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_03309832
+<http://purl.obolibrary.org/obo/FOODON_03309832> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/FOODON_03301337> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :Peeling
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom <http://www.ease-crc.org/ont/SOMA.owl#Hand>
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peel
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :MustBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :genus ;
+                                                                   owl:hasValue "Citrus"
+                                                                 ] ;
+                                                 rdfs:comment "The orange is the fruit of the citrus species Citrus × sinensis in the family Rutaceae." ;
+                                                 rdfs:label "orange" ,
+                                                            "orange (whole, raw)"@en .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_03309927
+<http://purl.obolibrary.org/obo/FOODON_03309927> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030108> ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :Peeling
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                               owl:someValuesFrom :CuttingTask
+                                                                                                             ]
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                               owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                                   owl:allValuesFrom :Knife
+                                                                                                                                 ]
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Peel
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :Edible
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ,
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasPart ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :Stem
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :hasEdibility ;
+                                                                                                               owl:someValuesFrom :ShouldBeAvoided
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ] ;
+                                                 rdfs:comment "A berry fruit of a tomato plant, grown under controlled greenhouse conditions." ;
+                                                 rdfs:label "tomato" .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_03315502
+<http://purl.obolibrary.org/obo/FOODON_03315502> rdf:type owl:Class ;
+                                                 rdfs:subClassOf :stone_fruit ;
+                                                 rdfs:comment "A drupe fruit of a peach tree (Prunus persica)"@en ;
+                                                 rdfs:label "peach"@en .
+
+
+###  http://purl.obolibrary.org/obo/FOODON_03317509
+<http://purl.obolibrary.org/obo/FOODON_03317509> rdf:type owl:Class ;
+                                                 rdfs:subClassOf :stone_fruit ;
+                                                 rdfs:comment "A drupe fruit of an olive tree (Olea europaea)." ;
+                                                 rdfs:label "olive" .
+
+
+###  http://purl.obolibrary.org/obo/PO_0030102
+<http://purl.obolibrary.org/obo/PO_0030102> rdf:type owl:Class ;
+                                            rdfs:subClassOf <http://purl.obolibrary.org/obo/FOODON_00001057> ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                              owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                          owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                          owl:someValuesFrom :Peeling
+                                                                                                        ]
+                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                          owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                          owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                              owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                              owl:allValuesFrom :Nutcracker
+                                                                                                                            ]
+                                                                                                        ]
+                                                                                                      ) ;
+                                                                                   rdf:type owl:Class
+                                                                                 ]
+                                                            ] ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                              owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                          owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                          owl:someValuesFrom :CuttingTask
+                                                                                                        ]
+                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                          owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                          owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                              owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                              owl:allValuesFrom :Knife
+                                                                                                                            ]
+                                                                                                        ]
+                                                                                                      ) ;
+                                                                                   rdf:type owl:Class
+                                                                                 ]
+                                                            ] ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :hasPart ;
+                                                              owl:someValuesFrom [ owl:intersectionOf ( :Shell
+                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                          owl:onProperty :hasEdibility ;
+                                                                                                          owl:someValuesFrom :MustBeAvoided
+                                                                                                        ]
+                                                                                                      ) ;
+                                                                                   rdf:type owl:Class
+                                                                                 ]
+                                                            ] ;
+                                            rdfs:label "nut fruit" .
+
+
+###  http://purl.obolibrary.org/obo/PO_0030108
+<http://purl.obolibrary.org/obo/PO_0030108> rdf:type owl:Class ;
+                                            rdfs:subClassOf <http://purl.obolibrary.org/obo/FOODON_00001057> ;
+                                            rdfs:label "berry fruit" .
+
+
+###  http://purl.obolibrary.org/obo/PO_0030110
+<http://purl.obolibrary.org/obo/PO_0030110> rdf:type owl:Class ;
+                                            rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030108> ;
+                                            rdfs:label "pome fruit" .
+
+
+###  http://purl.obolibrary.org/obo/PO_0030111
+<http://purl.obolibrary.org/obo/PO_0030111> rdf:type owl:Class ;
+                                            rdfs:subClassOf <http://purl.obolibrary.org/obo/PO_0030108> ;
+                                            rdfs:label "pepo fruit" .
+
+
+###  http://qudt.org/schema/qudt#CountingUnit
+<http://qudt.org/schema/qudt#CountingUnit> rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://qudt.org/schema/qudt#ResourceUnit> .
+
+
+###  http://qudt.org/schema/qudt#ResourceUnit
+<http://qudt.org/schema/qudt#ResourceUnit> rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://qudt.org/schema/qudt/Quantity> .
+
+
+###  http://qudt.org/schema/qudt/Quantity
+<http://qudt.org/schema/qudt/Quantity> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity> .
+
+
+###  http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenKnife
+<http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenKnife> rdf:type owl:Class ;
+                                                         rdfs:subClassOf :CoreRemovalTool ,
+                                                                         :Knife ;
+                                                         rdfs:comment "Küchenmesser"@de .
+
+
+###  http://www.ease-crc.org/ont/SOMA.owl#Bread
+<http://www.ease-crc.org/ont/SOMA.owl#Bread> rdf:type owl:Class ;
+                                             rdfs:subClassOf :Food ,
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                                                               owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                                                         [ rdf:type owl:Restriction ;
+                                                                                                           owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                                                           owl:allValuesFrom :CuttingTask
+                                                                                                         ]
+                                                                                                         [ rdf:type owl:Restriction ;
+                                                                                                           owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                                                           owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                                                               owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                                                               owl:allValuesFrom :Knife
+                                                                                                                             ]
+                                                                                                         ]
+                                                                                                       ) ;
+                                                                                    rdf:type owl:Class
+                                                                                  ]
+                                                             ] .
+
+
+###  http://www.ease-crc.org/ont/SOMA.owl#Cutting
+<http://www.ease-crc.org/ont/SOMA.owl#Cutting> rdf:type owl:Class ;
+                                               rdfs:subClassOf :CuttingTask ,
+                                                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty :hasInputObject ;
+                                                                                        owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                                                             owl:unionOf ( :Food
+                                                                                                                           :FoodPart
+                                                                                                                         )
+                                                                                                           ]
+                                                                                      ]
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty :hasResultObject ;
+                                                                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                        owl:onClass :FoodPart
+                                                                                      ]
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty :hasResultObject ;
+                                                                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                        owl:onClass :Slice
+                                                                                      ]
+                                                                                    ) ;
+                                                                 rdf:type owl:Class
+                                                               ] ,
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :affordsPosition ;
+                                                                 owl:someValuesFrom :slicing_position
+                                                               ] ,
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :repetitions ;
+                                                                 owl:hasValue 1
+                                                               ] ;
+                                               :verb "cut"@en .
+
+
+###  http://www.ease-crc.org/ont/SOMA.owl#CuttingTool
+<http://www.ease-crc.org/ont/SOMA.owl#CuttingTool> rdf:type owl:Class ;
+                                                   rdfs:subClassOf :Tool .
+
+
+###  http://www.ease-crc.org/ont/SOMA.owl#Dicing
+<http://www.ease-crc.org/ont/SOMA.owl#Dicing> rdf:type owl:Class ;
+                                              rdfs:subClassOf :CuttingTask ,
+                                                              [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                       owl:onProperty :hasInputObject ;
+                                                                                       owl:someValuesFrom :Stripe
+                                                                                     ]
+                                                                                     [ rdf:type owl:Restriction ;
+                                                                                       owl:onProperty :hasResultObject ;
+                                                                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                       owl:onClass :Cube
+                                                                                     ]
+                                                                                     [ rdf:type owl:Restriction ;
+                                                                                       owl:onProperty :hasResultObject ;
+                                                                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                       owl:onClass :Stripe
+                                                                                     ]
+                                                                                   ) ;
+                                                                rdf:type owl:Class
+                                                              ] ,
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty :affordsPosition ;
+                                                                owl:someValuesFrom :slicing_position
+                                                              ] ,
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty :requiresPriorTask ;
+                                                                owl:someValuesFrom :Julienning
+                                                              ] ,
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty :repetitions ;
+                                                                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                owl:onDataRange xsd:int
+                                                              ] ;
+                                              :verb "dice"@en ;
+                                              rdfs:comment "Cut an object into Cubes"@en .
+
+
+###  http://www.ease-crc.org/ont/SOMA.owl#Disposition
+<http://www.ease-crc.org/ont/SOMA.owl#Disposition> rdf:type owl:Class ;
+                                                   rdfs:subClassOf :ObjectProperty .
+
+
+###  http://www.ease-crc.org/ont/SOMA.owl#Hand
+<http://www.ease-crc.org/ont/SOMA.owl#Hand> rdf:type owl:Class ;
+                                            rdfs:subClassOf :PeelingTool ;
+                                            rdfs:comment "Hand as a tool to e.g. peel a banana"@en .
+
+
+###  http://www.ease-crc.org/ont/SOMA.owl#Slicing
+<http://www.ease-crc.org/ont/SOMA.owl#Slicing> rdf:type owl:Class ;
+                                               rdfs:subClassOf :CuttingTask ,
+                                                               [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty :hasInputObject ;
+                                                                                        owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                                                             owl:unionOf ( :Food
+                                                                                                                           :FoodPart
+                                                                                                                         )
+                                                                                                           ]
+                                                                                      ]
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty :hasResultObject ;
+                                                                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                        owl:onClass :FoodPart
+                                                                                      ]
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty :hasResultObject ;
+                                                                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                        owl:onClass :Slice
+                                                                                      ]
+                                                                                    ) ;
+                                                                 rdf:type owl:Class
+                                                               ] ,
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :affordsPosition ;
+                                                                 owl:someValuesFrom :slicing_position
+                                                               ] ,
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :repetitions ;
+                                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onDataRange xsd:int
+                                                               ] ;
+                                               :verb "slice"@en ;
+                                               rdfs:comment "cut the object into multiple slices"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#AppleCutter
+:AppleCutter rdf:type owl:Class ;
+             rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#CuttingTool> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Carving
+:Carving rdf:type owl:Class ;
+         rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Cutting> ;
+         :verb "carve"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Chopping
+:Chopping rdf:type owl:Class ;
+          rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Dicing> ;
+          :verb "chop"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Color
+:Color rdf:type owl:Class ;
+       rdfs:subClassOf :ObjectProperty .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Core
+:Core rdf:type owl:Class ;
+      rdfs:subClassOf :PartInside ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                        owl:someValuesFrom [ owl:intersectionOf ( :CoreRemovability
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                    owl:someValuesFrom :CoreCutting
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ]
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                        owl:someValuesFrom [ owl:intersectionOf ( :CoreRemovability
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                    owl:someValuesFrom :CoreScraping
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ]
+                      ] ;
+      rdfs:comment "Kerngehäuse (z.B. Apfel, Birne)"@de .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#CoreCutting
+:CoreCutting rdf:type owl:Class ;
+             rdfs:subClassOf :CoreRemoving .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#CoreRemovability
+:CoreRemovability rdf:type owl:Class ;
+                  rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Disposition> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#CoreRemovalTool
+:CoreRemovalTool rdf:type owl:Class ;
+                 rdfs:subClassOf :Tool .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#CoreRemoving
+:CoreRemoving rdf:type owl:Class ;
+              rdfs:subClassOf :FoodPreparation .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#CoreScraping
+:CoreScraping rdf:type owl:Class ;
+              rdfs:subClassOf :CoreRemoving .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Cube
+:Cube rdf:type owl:Class ;
+      rdfs:subClassOf :Shape .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Cubing
+:Cubing rdf:type owl:Class ;
+        rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Dicing> ;
+        :verb "cube"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#CuttingAction
+:CuttingAction rdf:type owl:Class ;
+               rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#CuttingTask
+:CuttingTask rdf:type owl:Class ;
+             rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Deseeded
+:Deseeded rdf:type owl:Class ;
+          rdfs:subClassOf :FruitState .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Edibility
+:Edibility rdf:type owl:Class ;
+           rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Disposition> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Edible
+:Edible rdf:type owl:Class ;
+        rdfs:subClassOf :Edibility .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Eighth
+:Eighth rdf:type owl:Class ;
+        rdfs:subClassOf <http://qudt.org/schema/qudt#CountingUnit> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Filleting
+:Filleting rdf:type owl:Class ;
+           rdfs:subClassOf :FoodPreparation .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#FleshOrPulp
+:FleshOrPulp rdf:type owl:Class ;
+             rdfs:subClassOf :PartInside ;
+             rdfs:comment "Fruchtfleisch"@de .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Food
+:Food rdf:type owl:Class ;
+      rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#FoodPart
+:FoodPart rdf:type owl:Class ;
+          rdfs:subClassOf :Food .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#FoodPreparation
+:FoodPreparation rdf:type owl:Class ;
+                 rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#FruitState
+:FruitState rdf:type owl:Class ;
+            rdfs:subClassOf :ObjectProperty .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Halve
+:Halve rdf:type owl:Class ;
+       rdfs:subClassOf <http://qudt.org/schema/qudt#CountingUnit> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Halving
+:Halving rdf:type owl:Class ;
+         rdfs:subClassOf :CuttingTask ,
+                         [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                  owl:onProperty :hasInputObject ;
+                                                  owl:someValuesFrom :Food
+                                                ]
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty :hasResultObject ;
+                                                  owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                                  owl:onClass :Halve
+                                                ]
+                                              ) ;
+                           rdf:type owl:Class
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :affordsPosition ;
+                           owl:someValuesFrom :halving_position
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :repetitions ;
+                           owl:hasValue 1
+                         ] ;
+         :verb "halve"@en ;
+         rdfs:comment "Cut the object into halves"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Inedible
+:Inedible rdf:type owl:Class ;
+          rdfs:subClassOf :Edibility .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Julienning
+:Julienning rdf:type owl:Class ;
+            rdfs:subClassOf :CuttingTask ,
+                            [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :hasInputObject ;
+                                                     owl:someValuesFrom :Slice
+                                                   ]
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :hasResultObject ;
+                                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                     owl:onClass :Slice
+                                                   ]
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :hasResultObject ;
+                                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                     owl:onClass :Stripe
+                                                   ]
+                                                 ) ;
+                              rdf:type owl:Class
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :affordsPosition ;
+                              owl:someValuesFrom :slicing_position
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :requiresPriorTask ;
+                              owl:someValuesFrom <http://www.ease-crc.org/ont/SOMA.owl#Slicing>
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :repetitions ;
+                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:int
+                            ] ;
+            :verb "julienne"@en ;
+            rdfs:comment "Cut an object into Stripes"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Knife
+:Knife rdf:type owl:Class ;
+       rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#CuttingTool> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Mincing
+:Mincing rdf:type owl:Class ;
+         rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Dicing> ;
+         :verb "mince"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#MustBeAvoided
+:MustBeAvoided rdf:type owl:Class ;
+               rdfs:subClassOf :Inedible .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Nutcracker
+:Nutcracker rdf:type owl:Class ;
+            rdfs:subClassOf :PeelingTool .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#ObjectProperty
+:ObjectProperty rdf:type owl:Class ;
+                rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Oval
+:Oval rdf:type owl:Class ;
+      rdfs:subClassOf :Shape .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Paring
+:Paring rdf:type owl:Class ;
+        rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Cutting> ;
+        :verb "pare"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#ParingKnife
+:ParingKnife rdf:type owl:Class ;
+             rdfs:subClassOf :Knife ;
+             rdfs:comment "Gemüsemesser"@de .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#PartInside
+:PartInside rdf:type owl:Class ;
+            rdfs:subClassOf :FoodPart .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#PartOutside
+:PartOutside rdf:type owl:Class ;
+             rdfs:subClassOf :FoodPart .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Peel
+:Peel rdf:type owl:Class ;
+      rdfs:subClassOf :SkinOrPeel ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                        owl:someValuesFrom [ owl:intersectionOf ( :Peelability
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                    owl:someValuesFrom :Peeling
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ]
+                      ] .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Peelability
+:Peelability rdf:type owl:Class ;
+             rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Disposition> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Peeled
+:Peeled rdf:type owl:Class ;
+        rdfs:subClassOf :FruitState .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#PeeledAndDeseeded
+:PeeledAndDeseeded rdf:type owl:Class ;
+                   rdfs:subClassOf [ owl:intersectionOf ( :Deseeded
+                                                          :Peeled
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Peeler
+:Peeler rdf:type owl:Class ;
+        rdfs:subClassOf :PeelingTool ;
+        rdfs:comment "Sparschäler"@de .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Peeling
+:Peeling rdf:type owl:Class ;
+         rdfs:subClassOf :FoodPreparation ,
+                         [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                  owl:onProperty :hasInitialState ;
+                                                  owl:someValuesFrom :Raw
+                                                ]
+                                                [ rdf:type owl:Restriction ;
+                                                  owl:onProperty :hasResultingState ;
+                                                  owl:allValuesFrom :Peeled
+                                                ]
+                                              ) ;
+                           rdf:type owl:Class
+                         ] .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#PeelingTool
+:PeelingTool rdf:type owl:Class ;
+             rdfs:subClassOf :Tool .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Piece
+:Piece rdf:type owl:Class ;
+       rdfs:subClassOf <http://qudt.org/schema/qudt#CountingUnit> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Pit
+:Pit rdf:type owl:Class ;
+     rdfs:subClassOf :PartInside ;
+     rdfs:comment "Kern / Stein (z.B. Pfirsich, Kirsche)"@de .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Quarter
+:Quarter rdf:type owl:Class ;
+         rdfs:subClassOf <http://qudt.org/schema/qudt#CountingUnit> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#QuarterCoreRemoving
+:QuarterCoreRemoving rdf:type owl:Class ;
+                     rdfs:subClassOf :CoreCutting ,
+                                     [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :hasInputObject ;
+                                                              owl:someValuesFrom :Quarter
+                                                            ]
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :hasResultObject ;
+                                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass :Quarter
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Quartering
+:Quartering rdf:type owl:Class ;
+            rdfs:subClassOf :CuttingTask ,
+                            [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :hasInputObject ;
+                                                     owl:someValuesFrom :Halve
+                                                   ]
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :hasResultObject ;
+                                                     owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                                     owl:onClass :Quarter
+                                                   ]
+                                                 ) ;
+                              rdf:type owl:Class
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :affordsPosition ;
+                              owl:someValuesFrom :halving_position
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :requiresPriorTask ;
+                              owl:someValuesFrom :Halving
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :repetitions ;
+                              owl:hasValue 1
+                            ] ;
+            :verb "quarter"@en ;
+            rdfs:comment "Cut an object into Quarter"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Raw
+:Raw rdf:type owl:Class ;
+     rdfs:subClassOf :FruitState .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Round
+:Round rdf:type owl:Class ;
+       rdfs:subClassOf :Shape .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Sawing
+:Sawing rdf:type owl:Class ;
+        rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Cutting> ;
+        :verb "saw"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Seeds
+:Seeds rdf:type owl:Class ;
+       rdfs:subClassOf :PartInside ;
+       rdfs:comment "Samen / Kerne (z.B. Wassermelone, Apfel)"@de .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Semicircle
+:Semicircle rdf:type owl:Class ;
+            rdfs:subClassOf :Shape .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Semioval
+:Semioval rdf:type owl:Class ;
+          rdfs:subClassOf :Shape .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Shape
+:Shape rdf:type owl:Class ;
+       rdfs:subClassOf :ObjectProperty .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Shell
+:Shell rdf:type owl:Class ;
+       rdfs:subClassOf :PartOutside ;
+       rdfs:comment "Schale / Gehäuse (z.B. Nüsse)"@de .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#ShouldBeAvoided
+:ShouldBeAvoided rdf:type owl:Class ;
+                 rdfs:subClassOf :Inedible .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Sixteenth
+:Sixteenth rdf:type owl:Class ;
+           rdfs:subClassOf <http://qudt.org/schema/qudt#CountingUnit> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Size
+:Size rdf:type owl:Class ;
+      rdfs:subClassOf :ObjectProperty .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#SkinOrPeel
+:SkinOrPeel rdf:type owl:Class ;
+            rdfs:subClassOf :PartOutside ;
+            rdfs:comment "Haut / Schale (z.B. Apfel, Orange)"@de .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Slice
+:Slice rdf:type owl:Class ;
+       rdfs:subClassOf :Shape .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Slivering
+:Slivering rdf:type owl:Class ;
+           rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Slicing> ;
+           :verb "sliver"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Snipping
+:Snipping rdf:type owl:Class ;
+          rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Slicing> ;
+          :verb "snip"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Spoon
+:Spoon rdf:type owl:Class ;
+       rdfs:subClassOf :CoreRemovalTool ;
+       rdfs:comment "Spoon to scoop out sth,"@en .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Stem
+:Stem rdf:type owl:Class ;
+      rdfs:subClassOf :PartOutside ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                        owl:someValuesFrom [ owl:intersectionOf ( :StemRemovability
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                    owl:someValuesFrom :StemRemoving
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ]
+                      ] ;
+      rdfs:comment "Stiel / Stängel (z.B. Apfel, Kirsche)"@de .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#StemRemovability
+:StemRemovability rdf:type owl:Class ;
+                  rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Disposition> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#StemRemoving
+:StemRemoving rdf:type owl:Class ;
+              rdfs:subClassOf :FoodPreparation .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Stripe
+:Stripe rdf:type owl:Class ;
+        rdfs:subClassOf :Shape .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Tool
+:Tool rdf:type owl:Class ;
+      rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#halving_position
+:halving_position rdf:type owl:Class ;
+                  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#slicing_position
+:slicing_position rdf:type owl:Class ;
+                  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#stone_fruit
+:stone_fruit rdf:type owl:Class ;
+             rdfs:subClassOf <http://purl.obolibrary.org/obo/FOODON_00001057> ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                               owl:someValuesFrom [ owl:intersectionOf ( :CoreRemovability
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                           owl:someValuesFrom :CoreCutting
+                                                                         ]
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                           owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                               owl:allValuesFrom :Knife
+                                                                                             ]
+                                                                         ]
+                                                                       ) ;
+                                                    rdf:type owl:Class
+                                                  ]
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#hasDisposition> ;
+                               owl:someValuesFrom [ owl:intersectionOf ( <http://www.ease-crc.org/ont/situation_awareness#Cuttability>
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTask> ;
+                                                                           owl:someValuesFrom :CuttingTask
+                                                                         ]
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty <http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger> ;
+                                                                           owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ;
+                                                                                               owl:allValuesFrom :Knife
+                                                                                             ]
+                                                                         ]
+                                                                       ) ;
+                                                    rdf:type owl:Class
+                                                  ]
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :hasPart ;
+                               owl:someValuesFrom [ owl:intersectionOf ( :Core
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty :hasEdibility ;
+                                                                           owl:someValuesFrom :MustBeAvoided
+                                                                         ]
+                                                                       ) ;
+                                                    rdf:type owl:Class
+                                                  ]
+                             ] .
+
+
+###  http://www.ease-crc.org/ont/situation_awareness#BreadKnife
+<http://www.ease-crc.org/ont/situation_awareness#BreadKnife> rdf:type owl:Class ;
+                                                             rdfs:subClassOf :Knife ;
+                                                             rdfs:comment "Brotmesser"@de .
+
+
+###  http://www.ease-crc.org/ont/situation_awareness#Cuttability
+<http://www.ease-crc.org/ont/situation_awareness#Cuttability> rdf:type owl:Class ;
+                                                              rdfs:subClassOf <http://www.ease-crc.org/ont/SOMA.owl#Disposition> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Abstract
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Abstract> rdf:type owl:Class ;
+                                                                 rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> rdf:type owl:Class ;
+                                                               rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept> rdf:type owl:Class ;
+                                                                rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity> rdf:type owl:Class ;
+                                                               rdfs:subClassOf owl:Thing .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event> rdf:type owl:Class ;
+                                                              rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType> rdf:type owl:Class ;
+                                                                  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object> rdf:type owl:Class ;
+                                                               rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject> rdf:type owl:Class ;
+                                                                       rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region> rdf:type owl:Class ;
+                                                               rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Abstract> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject> rdf:type owl:Class ;
+                                                                     rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion> rdf:type owl:Class ;
+                                                                    rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task> rdf:type owl:Class ;
+                                                             rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType> .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.ease-crc.org/ont/food_cutting#AppleCutter_1
+:AppleCutter_1 rdf:type owl:NamedIndividual ,
+                        :AppleCutter .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Green
+:Green rdf:type owl:NamedIndividual ,
+                :Color .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Green_Apple
+:Green_Apple rdf:type owl:NamedIndividual ,
+                      <http://purl.obolibrary.org/obo/FOODON_03301710> ;
+             :hasColor :Green .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Large
+:Large rdf:type owl:NamedIndividual ,
+                :Size .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Medium
+:Medium rdf:type owl:NamedIndividual ,
+                 :Size .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Orange
+:Orange rdf:type owl:NamedIndividual ,
+                 :Color .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Orange_01
+:Orange_01 rdf:type owl:NamedIndividual ,
+                    <http://purl.obolibrary.org/obo/FOODON_03309832> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Orange_02
+:Orange_02 rdf:type owl:NamedIndividual ,
+                    <http://purl.obolibrary.org/obo/FOODON_03309832> .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#ParingKnife_01
+:ParingKnife_01 rdf:type owl:NamedIndividual ,
+                         :ParingKnife .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#QuarteringRedAppleWithParing
+:QuarteringRedAppleWithParing rdf:type owl:NamedIndividual ;
+                              :target :Red_Apple .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Red
+:Red rdf:type owl:NamedIndividual ,
+              :Color .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Red_Apple
+:Red_Apple rdf:type owl:NamedIndividual ,
+                    <http://purl.obolibrary.org/obo/FOODON_03301710> ;
+           :hasColor :Red .
+
+
+###  http://www.ease-crc.org/ont/food_cutting#Small
+:Small rdf:type owl:NamedIndividual ,
+                :Size .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
