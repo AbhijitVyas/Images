@@ -1,21 +1,21 @@
 ActionId,ActionSuccess,ActionType,AgentName,ObjectsParticipated
 1,True,Wiping,PR2,mop
-2,True,DishWasherSetting,Human2,spoon and dishwasher
-3,True,Pouring,TIAGO,cup and bowl
+2,True,DishWasherSetting,Human2,spoon|dishwasher
+3,True,Pouring,TIAGO,cup|bowl
 4,False,Wiping,HSR,mop
-5,True,DishWasherSetting,HSR,plate and dishwasher
-6,True,Pouring,Human2,milkkarton and bowl
-7,True,Pouring,Human2,kettle and cup
+5,True,DishWasherSetting,HSR,plate|dishwasher
+6,True,Pouring,Human2,milkkarton|bowl
+7,True,Pouring,Human2,kettle|cup
 8,True,Wiping,TIAGO,mop
 9,True,Wiping,HSR,mop
-10,False,DishWasherSetting,HSR,knife and dishwasher
-11,False,Cutting,HSR,knife and vegetable
+10,False,DishWasherSetting,HSR,knife|dishwasher
+11,False,Cutting,HSR,knife|vegetable
 12,False,Wiping,HSR,mop
 13,False,Wiping,TIAGO,mop
-14,True,DishWasherSetting,Human1,dishwasher and spoon
-15,True,FridgeOpening,TIAGO,milkkarton and fridge
-16,True,DishWasherSetting,PR2,dishwasher and bowl
-17,True,FridgeOpening,Human2,coke and fridge
-18,True,DishWasherSetting,PR2,fork and dishwasher
-19,True,Cutting,HSR,cucumber and knife
-20,False,Cutting,TIAGO,breadknife and bread
+14,True,DishWasherSetting,Human1,dishwasher|spoon
+15,True,FridgeOpening,TIAGO,milkkarton|fridge
+16,True,DishWasherSetting,PR2,dishwasher|bowl
+17,True,FridgeOpening,Human2,coke|fridge
+18,True,DishWasherSetting,PR2,fork|dishwasher
+19,True,Cutting,HSR,cucumber|knife
+20,False,Cutting,TIAGO,breadknife|bread
